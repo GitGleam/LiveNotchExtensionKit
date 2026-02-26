@@ -1,0 +1,30 @@
+// swift-tools-version: 6.0
+
+import PackageDescription
+
+let package = Package(
+    name: "LiveNotchExtensionKit",
+    platforms: [
+        .macOS(.v13)
+    ],
+    products: [
+        // Products define the executables and libraries a package produces, making them visible to other packages.
+        .library(
+            name: "LiveNotchExtensionKit",
+            targets: ["LiveNotchExtensionKit"]
+        ),
+    ],
+    targets: [
+        // Targets are the basic building blocks of a package, defining a module or a test suite.
+        // Targets can depend on other targets in this package and products from dependencies.
+        .target(
+            name: "LiveNotchExtensionKit",
+            dependencies: [],
+            path: "Sources/LiveNotchExtensionKit"
+        ),
+        .testTarget(
+            name: "LiveNotchExtensionKitTests",
+            dependencies: ["LiveNotchExtensionKit"]
+        ),
+    ]
+)
