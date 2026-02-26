@@ -1,0 +1,43 @@
+//
+//  LiveNotchColorDescriptor.swift
+//  LiveNotchExtensionKit
+//
+//  Color configurations compatible with Codable and XPC.
+//
+
+import Foundation
+
+/// Platform-independent color description.
+public struct LiveNotchColorDescriptor: Codable, Sendable, Hashable {
+    public let red: Double
+    public let green: Double
+    public let blue: Double
+    public let alpha: Double
+    
+    public init(red: Double, green: Double, blue: Double, alpha: Double = 1.0) {
+        self.red = min(max(red, 0), 1)
+        self.green = min(max(green, 0), 1)
+        self.blue = min(max(blue, 0), 1)
+        self.alpha = min(max(alpha, 0), 1)
+    }
+    
+    // MARK: - Predefined Colors
+    
+    public static let white = LiveNotchColorDescriptor(red: 1, green: 1, blue: 1)
+    public static let black = LiveNotchColorDescriptor(red: 0, green: 0, blue: 0)
+    public static let red = LiveNotchColorDescriptor(red: 1, green: 0, blue: 0)
+    public static let green = LiveNotchColorDescriptor(red: 0, green: 1, blue: 0)
+    public static let blue = LiveNotchColorDescriptor(red: 0, green: 0, blue: 1)
+    public static let yellow = LiveNotchColorDescriptor(red: 1, green: 1, blue: 0)
+    public static let orange = LiveNotchColorDescriptor(red: 1, green: 0.6, blue: 0)
+    public static let purple = LiveNotchColorDescriptor(red: 0.6, green: 0, blue: 1)
+    public static let pink = LiveNotchColorDescriptor(red: 1, green: 0, blue: 0.6)
+    public static let gray = LiveNotchColorDescriptor(red: 0.5, green: 0.5, blue: 0.5)
+    
+    /// Use system accent color
+    public static let accent = LiveNotchColorDescriptor(red: -1, green: -1, blue: -1)
+    
+    public var isAccent: Bool {
+        red < 0 && green < 0 && blue < 0
+    }
+}
